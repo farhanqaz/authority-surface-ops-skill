@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Validate skill link integrity (mirrors solana-ai-kit validate.sh pattern)
+# Validate skill structure and internal links
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"

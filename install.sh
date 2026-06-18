@@ -86,5 +86,6 @@ if [[ -d "${SCRIPT_DIR}/commands" ]]; then
 fi
 
 echo ""
-echo "Done. Try: \"Run launch-week authority surface audit for mint <ADDRESS>\""
-echo "Optional core dependency: solana-dev-skill (program context, not authority ops)"
+echo "Installation complete."
+echo "Example: \"Run launch-week authority surface audit for mint <ADDRESS>\""
+echo "See README.md for usage. Recommended dependency: solana-dev-skill."

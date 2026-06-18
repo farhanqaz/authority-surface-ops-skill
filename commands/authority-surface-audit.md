@@ -57,7 +57,7 @@ new_baseline: {...}         # if clean review
 
 ## Step 6 — Human signoff reminder
 
-For `launch_verdict: go`, remind user: AI does not replace human signoff — record approver names.
+For `launch_verdict: go`, remind the user to record named approvers in `signed_off_by` — operational sign-off is a human responsibility.
 
 ---
 

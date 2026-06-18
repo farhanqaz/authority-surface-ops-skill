@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Read-only mint authority audit — demo helper for judges (not a monitoring bot)
+# Read-only mint authority check via public RPC
 set -euo pipefail
 
-MINT="${1:?Usage: demo-audit.sh <MINT_ADDRESS> [cluster]}"
+MINT="${1:?Usage: check-mint-authorities.sh <MINT_ADDRESS> [cluster]}"
 CLUSTER="${2:-devnet}"
 
 case "$CLUSTER" in
   mainnet-beta) RPC="https://api.mainnet-beta.solana.com" ;;
   devnet) RPC="https://api.devnet.solana.com" ;;
-  *) echo "Unsupported cluster: $CLUSTER"; exit 1 ;;
+  *) echo "Unsupported cluster: $CLUSTER" >&2; exit 1 ;;
 esac
 
 RESP=$(curl -s "$RPC" -X POST -H "Content-Type: application/json" -d "{

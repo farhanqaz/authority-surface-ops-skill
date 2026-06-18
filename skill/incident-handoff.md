@@ -74,7 +74,7 @@ incident:
   authority_surfaces: [mint, upgrade]
   owner: <human name>
   next_update: +30min
-  public_comms: none  # v1 — human/legal decides
+  public_comms: none  # determined by incident lead / legal
 ```
 
 ## Exit criteria

@@ -23,6 +23,3 @@ launch_verdict: go
 blocking_findings: []
 signed_off_by: []
 escalate: none
-notes: |
-  Example report for a production token with revoked mint/freeze authorities.
-  Reproduce: ./scripts/demo-audit.sh 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R mainnet-beta

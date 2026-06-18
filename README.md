@@ -1,28 +1,44 @@
 # Authority Surface Ops Skill
 
-Live on-chain **admin surface operations** for Solana builders — mint, freeze, metadata, and upgrade authority verification, multisig pre-sign checks, drift detection, and incident handoff.
+A Claude Code skill for **live on-chain admin surface operations** on Solana — mint, freeze, metadata, and upgrade authority verification, multisig pre-sign checks, drift detection, and incident handoff.
 
-> **Addon skill** for [Solana AI Kit](https://github.com/solanabr/solana-ai-kit).  
-> **Extends** [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill) for program context only.  
-> **Does not replace** security audit skills or token creation workflows.
+> **Addon** for [Solana AI Kit](https://github.com/solanabr/solana-ai-kit) · **Extends** [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill)
+
+## Overview
+
+Security audit skills review **code before deployment**. Token skills cover **creation and integration**. Neither covers **ongoing authority state** after launch.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│              authority-surface-ops-skill (addon)            │
+│                                                             │
+│  Launch gate · Weekly review · Authority drift · Multisig   │
+│  pre-sign · Incident handoff                                │
+│                             │                               │
+│                             ▼ references                    │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │  solana-dev-skill · audit skills · token-engineer     │  │
+│  │  (programs, clients, code review, token setup)        │  │
+│  └───────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## Problem
 
-Teams revoke mint authority once, then never look again. Meanwhile:
+After launch, teams often stop checking admin surfaces:
 
-- Metadata update authority stays on the deployer wallet
-- Upgrade authority sits on a hot key while TVL grows
-- Squads proposals get signed without instruction review
-- Nobody notices an authority changed until users panic
+- Metadata update authority remains on a deployer wallet
+- Program upgrade authority stays on a single signer while TVL grows
+- Squads proposals are signed without reviewing authority-changing instructions
+- Authority changes go unnoticed until users report an issue
 
-Audit skills review **code before ship**. This skill operates **live admin surfaces after ship**.
+This skill provides repeatable **ops cadences** and structured **Authority Surface Reports** for those surfaces.
 
-## What it covers
+## Modules
 
-| Surface | Module |
-|---------|--------|
-| Mint authority | `skill/mint-freeze-authority.md` |
-| Freeze authority | `skill/mint-freeze-authority.md` |
+| Surface / workflow | File |
+|---------------------|------|
+| Mint & freeze authority | `skill/mint-freeze-authority.md` |
 | Metadata authority | `skill/metadata-authority.md` |
 | Upgrade authority | `skill/upgrade-authority.md` |
 | Multisig pre-sign | `skill/multisig-verification.md` |
@@ -31,25 +47,27 @@ Audit skills review **code before ship**. This skill operates **live admin surfa
 | Weekly review | `skill/weekly-review.md` |
 | Incident handoff | `skill/incident-handoff.md` |
 
-## Install
+## Installation
 
 ```bash
 git clone https://github.com/farhanqaz/authority-surface-ops-skill
 cd authority-surface-ops-skill
 chmod +x install.sh
-./install.sh          # ~/.claude/skills/
-./install.sh --project  # ./.claude/skills/ (project-local)
-./install.sh -y         # non-interactive
+./install.sh              # ~/.claude/skills/
+./install.sh --project    # ./.claude/skills/
+./install.sh -y           # non-interactive
 ```
 
-## Usage examples
+Installs the skill directory plus bundled agent and command definitions. Recommended alongside `solana-dev-skill` for program and client context.
+
+## Usage
 
 ```
-Run launch-week authority audit for mint So111... and program Tokenkeg...
+Run launch-week authority surface audit for mint <MINT> and program <PROGRAM_ID>
 ```
 
 ```
-Weekly authority review — baseline is ops/authority-baseline.json
+Weekly authority review using baseline at ops/authority-baseline.json
 ```
 
 ```
@@ -57,62 +75,67 @@ Verify this Squads proposal before I sign — does it change mint authority?
 ```
 
 ```
-Mint authority changed since yesterday — drift vs baseline, escalate if critical
+Compare current mint authorities against last week's baseline and flag drift
 ```
 
 ## Agent & command
 
 | Asset | Purpose |
 |-------|---------|
-| **authority-ops-engineer** | Runs checklists, reads surfaces, produces reports |
-| **/authority-surface-audit** | Structured audit → YAML Authority Surface Report |
+| `authority-ops-engineer` | Surface reads, checklists, drift diffs, YAML reports |
+| `/authority-surface-audit` | End-to-end audit workflow |
 
-## Output format
+## Output
 
-Every run produces an **Authority Surface Report** (YAML) with severity-ranked findings and explicit `launch_verdict` or `drift_summary`. See `skill/SKILL.md`.
+Engagements produce an **Authority Surface Report** (YAML): severity-ranked findings, `launch_verdict` or `drift_summary`, and escalation routing. Schema defined in `skill/SKILL.md`.
 
-## Repository structure
+Example reports: [`examples/reports/`](examples/reports/).
+
+## CLI verification
+
+Read-only helper for mint authority checks (RPC only, no keys required):
+
+```bash
+chmod +x scripts/check-mint-authorities.sh
+./scripts/check-mint-authorities.sh 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R mainnet-beta
+```
+
+See [docs/CLI.md](docs/CLI.md) for usage and sample output.
+
+## Validation
+
+```bash
+./validate.sh
+```
+
+## Scope
+
+**Included:** Authority verification, launch and weekly cadences, baseline drift, Squads pre-sign review, incident handoff to audit skills.
+
+**Excluded:** Treasury, payroll, governance voting, compliance, automated monitoring services, end-user transaction support, source-code security audits.
+
+## Repository layout
 
 ```
-authority-surface-ops-skill/
-├── README.md
-├── LICENSE
-├── DESIGN.md              # Maintainer spec (bounty / merge criteria)
-├── install.sh
-├── skill/
-│   ├── SKILL.md           # Entry point + routing
-│   └── *.md               # Progressive disclosure modules
+.
+├── skill/SKILL.md          # Entry point and routing
 ├── agents/
-│   └── authority-ops-engineer.md
-└── commands/
-    └── authority-surface-audit.md
+├── commands/
+├── scripts/                # Optional CLI helpers
+├── examples/               # Baseline and report samples
+├── docs/
+└── install.sh
 ```
 
-## Boundaries
-
-**In scope:** Authority reads, checklists, baselines, multisig pre-sign, incident handoff to audit skills.
-
-**Out of scope (v1):** Treasury, payroll, governance voting, compliance/tax, monitoring bots, user tx support, code audits.
-
-## Related
+## Related projects
 
 - [Solana AI Kit](https://github.com/solanabr/solana-ai-kit)
-- [solana-game-skill](https://github.com/solanabr/solana-game-skill) (structure reference)
-- [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill) (core dev)
+- [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill)
+- [solana-game-skill](https://github.com/solanabr/solana-game-skill) — structural reference
 
-## Demo
+## Contributing
 
-```bash
-chmod +x scripts/demo-audit.sh
-./scripts/demo-audit.sh 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R mainnet-beta  # go
-./scripts/demo-audit.sh 4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU devnet      # no-go
-```
-
-See [DEMO.md](DEMO.md) for CLI demo commands (no video required).
-
-```bash
-./validate.sh   # link + structure checks
-```
+See [CONTRIBUTING.md](CONTRIBUTING.md). Architecture notes: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## License
 

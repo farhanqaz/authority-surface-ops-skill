@@ -2,7 +2,7 @@
 
 Pre-sign verification for Squads and Realms proposals that touch authorities.
 
-## Scope (v1)
+## Scope
 
 - **Squads v4** vault transactions (most common founder multisig)
 - **Realms** governance accounts (authority holder identification only — not governance ops)
@@ -55,7 +55,7 @@ For each instruction in the proposal:
 - Vault PDA ≠ member wallet — always audit **vault transaction effects**
 - Draft proposals can be edited — re-verify hash/instructions immediately before sign
 
-## Realms-specific notes (v1)
+## Realms-specific notes
 
 - Use Realms to **identify** who holds program/token authorities
 - Do not analyze vote economics or proposal politics

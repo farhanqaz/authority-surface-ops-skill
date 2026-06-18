@@ -14,7 +14,7 @@ Authority surface gate from **T-7** through **T+7** (mainnet).
 
 - [ ] Document intended final state for each surface (mint, freeze, metadata, upgrade)
 - [ ] Map each surface to expected holder (revoked | multisig | program PDA)
-- [ ] Review with second human — not AI-only signoff
+- [ ] Review with a second approver — automated checks alone are insufficient
 
 ## T-3 — Devnet / staging proof
 
@@ -61,7 +61,7 @@ launch_verdict: no-go
 blocking_findings:
   - F-mint-001
   - F-upg-001
-signed_off_by: []  # human names — never AI-only
+signed_off_by: []  # named approvers required before launch
 next_review: T+0 + 6h
 ```
 

@@ -140,8 +140,8 @@ If RPC/decode fails twice on the same address: STOP, show raw response, ask user
 
 ---
 
-## Out of Scope (v1)
+## Out of scope
 
-Treasury runway, payroll, governance voting, tax/compliance, automated monitoring bots, user tx support triage, code security audits.
+Treasury runway, payroll, governance voting, tax/compliance, automated monitoring bots, user transaction support triage, source-code security audits.
 
 See [resources.md](resources.md) for boundaries vs other kit skills.

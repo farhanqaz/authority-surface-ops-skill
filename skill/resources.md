@@ -40,8 +40,8 @@ Store in private repo `ops/authorities/` — pubkeys only.
 | Code audit / vuln scan | Trail of Bits, safe-solana-builder |
 | Metaplex integration patterns | ext/metaplex |
 | User tx failed in wallet | `/debug-user-tx` (not authority ops) |
-| Treasury runway / payroll | Out of scope v1 |
-| Governance voting / DAO ops | Out of scope v1 |
+| Treasury runway / payroll | Out of scope |
+| Governance voting / DAO ops | Out of scope |
 
 ## External links
 
@@ -58,4 +58,4 @@ Refresh when:
 - Squads v4 account layout changes (update multisig module only)
 - Metaplex Core becomes default for new launches (extend metadata module)
 
-Quarterly review sufficient for v1.
+Quarterly review is sufficient under normal ecosystem churn.
