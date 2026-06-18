@@ -1,6 +1,6 @@
 # Authority Surface Ops Skill
 
-[![CI](https://github.com/farhanqaz/authority-surface-ops-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/farhanqaz/authority-surface-ops-skill/actions/workflows/ci.yml)
+[![CI](https://github.com/farhanqaz/authority-surface-ops-skill/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/farhanqaz/authority-surface-ops-skill/actions/workflows/ci.yml)
 
 Live on-chain **admin surface operations** for Solana — mint, freeze, metadata, and upgrade authority verification, multisig pre-sign checks, drift detection, and incident handoff.
 
