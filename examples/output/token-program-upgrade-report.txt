@@ -1,19 +1,19 @@
 report_version: 1
-mode: "point_check"
-cluster: "mainnet-beta"
+mode: point_check
+cluster: mainnet-beta
 assets:
   -
-    type: "program"
-    address: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-    program_data: "3gvYRKWyXRR9xKWe1ZjPhLY5ZJRN7KDB4rFZFGoJfFk2"
+    type: program
+    address: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+    program_data: 3gvYRKWyXRR9xKWe1ZjPhLY5ZJRN7KDB4rFZFGoJfFk2
 findings:
   -
-    id: "F-upg-001"
-    severity: "info"
-    surface: "upgrade"
-    observation: "Upgrade authority revoked (immutable deployment)"
-    recommendation: "Confirm immutability matches team policy"
+    id: F-upg-001
+    severity: info
+    surface: upgrade
+    observation: Upgrade authority revoked (immutable deployment)
+    recommendation: Confirm immutability matches team policy
     blocks_launch: false
-launch_verdict: "go"
+launch_verdict: go
 blocking_findings:
-escalate: "none"
+escalate: none

@@ -93,6 +93,15 @@ report = {
     "escalate": "incident" if sev == "critical" else "none",
 }
 
+def yaml_val(v):
+    if isinstance(v, bool):
+        return "true" if v else "false"
+    if isinstance(v, str):
+        if not v or any(c in v for c in ':[]{}#&*!|>\'"\\'):
+            return json.dumps(v)
+        return v
+    return v
+
 def emit_yaml(obj, indent=0):
     sp = "  " * indent
     if isinstance(obj, dict):
@@ -101,13 +110,13 @@ def emit_yaml(obj, indent=0):
                 print(f"{sp}{k}:")
                 emit_yaml(v, indent + 1)
             else:
-                print(f"{sp}{k}: {json.dumps(v) if isinstance(v, (str, bool)) else v}")
+                print(f"{sp}{k}: {yaml_val(v)}")
     elif isinstance(obj, list):
         for item in obj:
             if isinstance(item, dict):
                 print(f"{sp}-")
                 for k, v in item.items():
-                    print(f"{sp}  {k}: {json.dumps(v) if isinstance(v, (str, bool)) else v}")
+                    print(f"{sp}  {k}: {yaml_val(v)}")
             else:
                 print(f"{sp}- {item}")
 
