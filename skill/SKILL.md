@@ -13,6 +13,18 @@ user-invocable: true
 
 Use when the user asks about **live admin surfaces on-chain** — not how to write programs.
 
+## When NOT to Use (route elsewhere)
+
+| User need | Route to |
+|-----------|----------|
+| Audit Anchor/Rust source code | Trail of Bits / safe-solana-builder / solana-dev → security.md |
+| Create or configure a token | token-engineer / solana-dev |
+| Debug a user's failed wallet transaction | `/debug-user-tx` (kit) |
+| Treasury runway or payroll | Out of scope |
+| DAO governance voting strategy | Out of scope |
+
+Example reports: [examples/reports/](https://github.com/farhanqaz/authority-surface-ops-skill/tree/main/examples/reports)
+
 | Trigger phrases | Route to |
 |-----------------|----------|
 | "revoke mint authority", "who can mint", "freeze authority" | [mint-freeze-authority.md](mint-freeze-authority.md) |

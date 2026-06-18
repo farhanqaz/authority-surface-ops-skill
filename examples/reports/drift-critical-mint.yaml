@@ -1,0 +1,30 @@
+report_version: 1
+mode: drift
+cluster: mainnet-beta
+generated_at: "2026-06-25T09:00:00Z"
+baseline_ref: "ops/authority-baseline-2026-06-18.json"
+assets:
+  - type: mint
+    address: "So11111111111111111111111111111111111111112"
+    symbol: WSOL
+drift:
+  - asset: "mint:So111...112"
+    field: mint_authority
+    before: null
+    after: "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuFoxo7F"
+    severity: critical
+    action: incident-handoff
+drift_summary:
+  critical: 1
+  high: 0
+  unchanged_assets: 0
+recommendation: incident-handoff
+new_baseline_required: false
+escalate: incident
+findings:
+  - id: F-drift-001
+    severity: critical
+    surface: mint
+    observation: "Mint authority changed from null to 7xKX... since 2026-06-18 baseline"
+    recommendation: "Execute incident-handoff.md — freeze signing, preserve evidence, do not announce publicly"
+    blocks_launch: true

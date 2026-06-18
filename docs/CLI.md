@@ -9,13 +9,16 @@ Fetches mint and freeze authority fields via public RPC and prints an Authority 
 ### Usage
 
 ```bash
-./scripts/check-mint-authorities.sh <MINT_ADDRESS> [cluster]
+./scripts/check-mint-authorities.sh <MINT_ADDRESS> [cluster] [profile]
 ```
 
 | Argument | Default | Values |
 |----------|---------|--------|
 | `MINT_ADDRESS` | required | SPL or Token-2022 mint |
 | `cluster` | `devnet` | `devnet`, `mainnet-beta` |
+| `profile` | `fixed-supply` | `fixed-supply`, `stablecoin` |
+
+The **profile** selects the rubric from `skill/mint-freeze-authority.md`. Stablecoins (e.g. mainnet USDC) retain mint authority by design — use `stablecoin` to avoid false critical findings.
 
 ### Examples
 

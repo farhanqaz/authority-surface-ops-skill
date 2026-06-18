@@ -2,7 +2,7 @@
 description: "Run structured authority surface audit — mint, freeze, metadata, upgrade, multisig — output Authority Surface Report"
 ---
 
-Run an **Authority Surface Audit** using the authority-surface-ops skill.
+Run an **Authority Surface Audit** using the **authority-surface-ops** skill.
 
 ## Step 1 — Collect inputs
 
@@ -11,28 +11,31 @@ Ask if missing:
 1. Cluster (`mainnet-beta` | `devnet`)
 2. Asset list: mints, program IDs, multisig vaults
 3. Mode: `launch_gate` | `weekly` | `point_check` | `drift`
-4. Baseline JSON path (required for `drift`)
+4. Token model (for mints): `fixed-supply` | `stablecoin` | `program-controlled`
+5. Baseline JSON path (required for `drift`)
 
 ## Step 2 — Load skill routing
 
-Read in order:
+Read from `../skills/authority-surface-ops/`:
 
-1. [SKILL.md](../skill/SKILL.md) — output schema
+1. [SKILL.md](../skills/authority-surface-ops/SKILL.md) — output schema
 2. Mode file:
-   - `launch_gate` → [launch-checklist.md](../skill/launch-checklist.md)
-   - `weekly` → [weekly-review.md](../skill/weekly-review.md)
-   - `drift` → [authority-drift.md](../skill/authority-drift.md)
+   - `launch_gate` → [launch-checklist.md](../skills/authority-surface-ops/launch-checklist.md)
+   - `weekly` → [weekly-review.md](../skills/authority-surface-ops/weekly-review.md)
+   - `drift` → [authority-drift.md](../skills/authority-surface-ops/authority-drift.md)
+
+Compare output structure to [examples/reports/](https://github.com/farhanqaz/authority-surface-ops-skill/tree/main/examples/reports) when unsure.
 
 ## Step 3 — Surface reads
 
 For each asset, apply:
 
-- Mints → [mint-freeze-authority.md](../skill/mint-freeze-authority.md)
-- Metadata → [metadata-authority.md](../skill/metadata-authority.md)
-- Programs → [upgrade-authority.md](../skill/upgrade-authority.md)
-- Pending multisig → [multisig-verification.md](../skill/multisig-verification.md)
+- Mints → [mint-freeze-authority.md](../skills/authority-surface-ops/mint-freeze-authority.md)
+- Metadata → [metadata-authority.md](../skills/authority-surface-ops/metadata-authority.md)
+- Programs → [upgrade-authority.md](../skills/authority-surface-ops/upgrade-authority.md)
+- Pending multisig → [multisig-verification.md](../skills/authority-surface-ops/multisig-verification.md)
 
-Use RPC / Helius MCP / explorer — show addresses checked.
+Use RPC / Helius MCP / explorer — list every address checked.
 
 ## Step 4 — Produce report
 
@@ -52,13 +55,13 @@ new_baseline: {...}         # if clean review
 
 ## Step 5 — Escalate if needed
 
-- Any `critical` finding on mainnet → [incident-handoff.md](../skill/incident-handoff.md)
-- Code vulnerability suspected → recommend audit skills (do not duplicate audit)
+- Any `critical` finding on mainnet → [incident-handoff.md](../skills/authority-surface-ops/incident-handoff.md)
+- Code vulnerability suspected → audit skills (do not duplicate audit checklists here)
 
-## Step 6 — Human signoff reminder
+## Step 6 — Human signoff
 
-For `launch_verdict: go`, remind the user to record named approvers in `signed_off_by` — operational sign-off is a human responsibility.
+For `launch_verdict: go`, require named approvers in `signed_off_by`.
 
 ---
 
-**Do not include in output**: treasury advice, payroll, governance analysis, public announcement drafts.
+Do not include: treasury advice, payroll, governance analysis, or public announcement drafts.

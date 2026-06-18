@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Read-only mint authority check via public RPC
+# Profile: fixed-supply (default) | stablecoin
 set -euo pipefail
 
-MINT="${1:?Usage: check-mint-authorities.sh <MINT_ADDRESS> [cluster]}"
+MINT="${1:?Usage: check-mint-authorities.sh <MINT> [cluster] [profile]}"
 CLUSTER="${2:-devnet}"
+PROFILE="${3:-fixed-supply}"
 
 case "$CLUSTER" in
   mainnet-beta) RPC="https://api.mainnet-beta.solana.com" ;;
@@ -17,10 +19,10 @@ RESP=$(curl -s "$RPC" -X POST -H "Content-Type: application/json" -d "{
   \"params\":[\"$MINT\", {\"encoding\":\"jsonParsed\"}]
 }")
 
-python3 - "$MINT" "$CLUSTER" "$RESP" <<'PY'
+python3 - "$MINT" "$CLUSTER" "$PROFILE" "$RESP" <<'PY'
 import json, sys
 
-mint, cluster, raw = sys.argv[1], sys.argv[2], sys.argv[3]
+mint, cluster, profile, raw = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
 data = json.loads(raw)
 val = data.get("result", {}).get("value")
 if not val:
@@ -39,14 +41,25 @@ freeze_auth = info.get("freezeAuthority")
 findings = []
 
 if mint_auth:
-    sev = "critical" if cluster == "mainnet-beta" else "high"
+    if profile == "stablecoin":
+        sev = "info"
+        blocks = False
+        rec = "Stablecoin model — verify holder is documented issuer/multisig"
+    elif cluster == "mainnet-beta":
+        sev = "critical"
+        blocks = True
+        rec = "Revoke or move to multisig before fixed-supply launch"
+    else:
+        sev = "high"
+        blocks = True
+        rec = "Revoke or move to multisig before fixed-supply launch"
     findings.append({
         "id": "F-mint-001",
         "severity": sev,
         "surface": "mint",
         "observation": f"Mint authority present: {mint_auth}",
-        "recommendation": "Revoke or move to multisig before fixed-supply launch",
-        "blocks_launch": True,
+        "recommendation": rec,
+        "blocks_launch": blocks,
     })
 else:
     findings.append({
@@ -59,13 +72,21 @@ else:
     })
 
 if freeze_auth:
+    if profile == "stablecoin":
+        sev = "info"
+        blocks = False
+        rec = "Stablecoin model — verify freeze policy and holder"
+    else:
+        sev = "high"
+        blocks = True
+        rec = "Revoke unless required and held by multisig"
     findings.append({
         "id": "F-freeze-001",
-        "severity": "high",
+        "severity": sev,
         "surface": "freeze",
         "observation": f"Freeze authority present: {freeze_auth}",
-        "recommendation": "Revoke unless required and held by multisig",
-        "blocks_launch": True,
+        "recommendation": rec,
+        "blocks_launch": blocks,
     })
 else:
     findings.append({
@@ -84,6 +105,7 @@ report = {
     "report_version": 1,
     "mode": "point_check",
     "cluster": cluster,
+    "token_model": profile,
     "assets": [{"type": "mint", "address": mint}],
     "findings": findings,
     "launch_verdict": verdict,

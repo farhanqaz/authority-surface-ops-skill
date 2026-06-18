@@ -50,6 +50,16 @@ extensions: []  # Token-2022 only — list active extensions
 | Stablecoin / RWA | Multisig + timelock | Multisig (if used) |
 | Gaming consumable | Program PDA or multisig | Usually revoked |
 
+## Known production patterns
+
+| Mint | Mint authority | Interpretation |
+|------|----------------|----------------|
+| RAY `4k3Dyj...` | `null` | Fixed supply — launch gate pass |
+| USDC `EPjFWdd5...` | Circle-controlled key | **Expected** for stablecoin mint/burn — use `stablecoin` token model, not fixed-supply rubric |
+| Devnet test mint | Deployer wallet | Expected on devnet; **never** treat as mainnet launch pass |
+
+Always confirm **token model** before applying `blocks_launch`. A present mint authority is critical for fixed-supply launches and informational for stablecoins on documented multisig/holder keys.
+
 ## Multisig as holder
 
 If holder is a Squads vault / multisig:

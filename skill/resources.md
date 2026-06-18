@@ -1,5 +1,16 @@
 # Resources
 
+## Positioning
+
+| Phase | Kit skill |
+|-------|-----------|
+| Write / audit program code | solana-dev, Trail of Bits, safe-solana-builder |
+| Create token, configure extensions | token-engineer |
+| **Operate live admin authorities after deploy** | **authority-surface-ops (this skill)** |
+| User tx failed in production | `/debug-user-tx` |
+
+This skill reads **on-chain state** and runs **ops cadences**. It does not replace source-code audits or token setup guides.
+
 ## Program IDs (mainnet)
 
 | Program | Address |

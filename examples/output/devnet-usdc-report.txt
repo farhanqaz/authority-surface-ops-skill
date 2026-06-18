@@ -1,0 +1,28 @@
+report_version: 1
+mode: "point_check"
+cluster: "devnet"
+token_model: "fixed-supply"
+assets:
+  -
+    type: "mint"
+    address: "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+findings:
+  -
+    id: "F-mint-001"
+    severity: "high"
+    surface: "mint"
+    observation: "Mint authority present: GrNg1XM2ctzeE2mXxXCfhcTUbejM8Z4z4wNVTy2FjMEz"
+    recommendation: "Revoke or move to multisig before fixed-supply launch"
+    blocks_launch: True
+  -
+    id: "F-freeze-001"
+    severity: "high"
+    surface: "freeze"
+    observation: "Freeze authority present: CJtyoKSLrktozQzjERTiK3btQtiTK3nN4QrqGHLidyCT"
+    recommendation: "Revoke unless required and held by multisig"
+    blocks_launch: True
+launch_verdict: "no-go"
+blocking_findings:
+  - F-mint-001
+  - F-freeze-001
+escalate: "none"

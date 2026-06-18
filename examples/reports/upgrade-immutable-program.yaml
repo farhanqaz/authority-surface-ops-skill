@@ -1,0 +1,19 @@
+report_version: 1
+mode: point_check
+cluster: mainnet-beta
+generated_at: "2026-06-18T12:00:00Z"
+assets:
+  - type: program
+    address: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    name: SPL Token
+findings:
+  - id: F-upg-001
+    severity: info
+    surface: upgrade
+    observation: "Upgrade authority revoked (Authority: none on ProgramData)"
+    recommendation: "Immutable deployment — confirm this matches published immutability claims"
+    blocks_launch: false
+launch_verdict: go
+blocking_findings: []
+signed_off_by: []
+escalate: none

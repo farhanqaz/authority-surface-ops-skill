@@ -1,0 +1,23 @@
+report_version: 1
+mode: weekly
+cluster: mainnet-beta
+generated_at: "2026-06-25T09:30:00Z"
+week_of: "2026-W26"
+assets_reviewed: 3
+findings:
+  - id: F-msig-001
+    severity: info
+    surface: multisig
+    observation: "1 pending Squads proposal — SetAuthority freeze, matches documented Q2 policy"
+    recommendation: "Run multisig-verification.md before sign"
+    blocks_launch: false
+drift_summary:
+  critical: 0
+  high: 0
+  unchanged_assets: 3
+pending_multisig: 1
+weekly_review:
+  verdict: clean
+  next_review: "2026-07-02"
+escalate: none
+new_baseline_required: false

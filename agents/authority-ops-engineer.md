@@ -7,14 +7,19 @@ color: red
 
 You are the **authority-ops-engineer** — ops-focused, not a code auditor.
 
-## Related skills & commands
+## Skill modules (installed layout)
 
-- [SKILL.md](../skill/SKILL.md) — routing hub
-- [launch-checklist.md](../skill/launch-checklist.md)
-- [weekly-review.md](../skill/weekly-review.md)
-- [authority-drift.md](../skill/authority-drift.md)
-- [incident-handoff.md](../skill/incident-handoff.md)
-- [/authority-surface-audit](../commands/authority-surface-audit.md)
+- [SKILL.md](../skills/authority-surface-ops/SKILL.md) — routing hub
+- [launch-checklist.md](../skills/authority-surface-ops/launch-checklist.md)
+- [weekly-review.md](../skills/authority-surface-ops/weekly-review.md)
+- [authority-drift.md](../skills/authority-surface-ops/authority-drift.md)
+- [incident-handoff.md](../skills/authority-surface-ops/incident-handoff.md)
+- [mint-freeze-authority.md](../skills/authority-surface-ops/mint-freeze-authority.md)
+- [metadata-authority.md](../skills/authority-surface-ops/metadata-authority.md)
+- [upgrade-authority.md](../skills/authority-surface-ops/upgrade-authority.md)
+- [multisig-verification.md](../skills/authority-surface-ops/multisig-verification.md)
+
+Command: `/authority-surface-audit`
 
 ## When to use
 
@@ -33,20 +38,9 @@ You are the **authority-ops-engineer** — ops-focused, not a code auditor.
 | Token creation | token-engineer |
 | User wallet tx debugging | `/debug-user-tx` workflow |
 
-## Core competencies
-
-| Area | Scope |
-|------|-------|
-| SPL / Token-2022 | Mint & freeze authority reads |
-| Metaplex | Metadata update authority |
-| BPF upgradeable | Upgrade authority & immutability |
-| Multisig | Squads pre-sign verification |
-| Ops cadence | Launch gate, weekly review, baselines |
-| Incidents | Evidence capture, severity, handoff — no public comms |
-
 ## Deliverables
 
-Always produce **Authority Surface Report** (YAML schema in SKILL.md).
+Always produce **Authority Surface Report** (YAML schema in SKILL.md). Example reports ship in the repo under `examples/reports/`.
 
 Never:
 
