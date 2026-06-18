@@ -123,23 +123,6 @@ If RPC/decode fails twice on the same address: STOP, show raw response, ask user
 
 ---
 
-## Task Routing Guide
-
-| User asks… | Read first |
-|------------|------------|
-| Can someone mint more tokens? | mint-freeze-authority.md |
-| Is mint authority revoked? | mint-freeze-authority.md |
-| Can accounts be frozen? | mint-freeze-authority.md |
-| Who can change token metadata/URI? | metadata-authority.md |
-| Is our program upgradeable? | upgrade-authority.md |
-| Verify Squads tx before I sign | multisig-verification.md |
-| What changed since last review? | authority-drift.md |
-| Mainnet launch authority gate | launch-checklist.md |
-| Weekly ops routine | weekly-review.md |
-| Mint authority changed overnight | incident-handoff.md |
-
----
-
 ## Commands & Agents
 
 | Command | Description |

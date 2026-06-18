@@ -1,6 +1,6 @@
 # CLI reference
 
-Optional read-only utilities for verifying mint authorities outside an agent session.
+Optional read-only utilities for verifying authorities outside an agent session.
 
 ## check-mint-authorities.sh
 
@@ -38,20 +38,34 @@ Token with active authorities:
 
 Expected: `launch_verdict: no-go`, blocking findings when authorities are present on a fixed-supply launch profile.
 
+## check-program-upgrade.sh
+
+Reads BPF upgradeable program + ProgramData accounts via public RPC and reports upgrade authority state.
+
+### Usage
+
+```bash
+./scripts/check-program-upgrade.sh <PROGRAM_ID> [cluster]
+```
+
+| Argument | Default | Values |
+|----------|---------|--------|
+| `PROGRAM_ID` | required | Upgradeable BPF program |
+| `cluster` | `mainnet-beta` | `devnet`, `mainnet-beta` |
+
+### Example
+
+SPL Token program (immutable deployment):
+
+```bash
+./scripts/check-program-upgrade.sh TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA mainnet-beta
+```
+
+Expected: `launch_verdict: go`, upgrade authority revoked.
+
 ### Requirements
 
-- `curl`
 - `python3`
 - Network access to Solana public RPC endpoints
 
 No wallet, API keys, or signing capabilities are used.
-
-### Program upgrade check
-
-For upgrade authority on deployed programs:
-
-```bash
-solana program show <PROGRAM_ID> --url mainnet-beta
-```
-
-Inspect the `Authority` field on the ProgramData account (`none` indicates an immutable deployment).

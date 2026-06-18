@@ -69,6 +69,11 @@ fi
 cp -R "${SOURCE_DIR}" "${TARGET_SKILL}"
 echo "✓ Installed skill → ${TARGET_SKILL}"
 
+if [[ "$PROJECT" == true ]] && [[ -f "${SCRIPT_DIR}/CLAUDE.md" ]]; then
+  cp "${SCRIPT_DIR}/CLAUDE.md" "$(pwd)/CLAUDE.md"
+  echo "✓ Installed CLAUDE.md → $(pwd)/CLAUDE.md"
+fi
+
 if [[ -d "${SCRIPT_DIR}/agents" ]]; then
   for f in "${SCRIPT_DIR}"/agents/*.md; do
     [[ -f "$f" ]] || continue

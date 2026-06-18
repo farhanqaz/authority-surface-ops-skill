@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate skill structure
+        run: ./validate.sh
+
+      - name: Live mint check (mainnet RAY)
+        run: |
+          out=$(./scripts/check-mint-authorities.sh 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R mainnet-beta)
+          echo "$out"
+          echo "$out" | grep -q 'launch_verdict: go'
+
+      - name: Live program upgrade check (SPL Token)
+        run: |
+          out=$(./scripts/check-program-upgrade.sh TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA mainnet-beta)
+          echo "$out"
+          echo "$out" | grep -q 'launch_verdict: go'

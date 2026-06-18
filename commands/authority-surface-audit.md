@@ -24,7 +24,7 @@ Read from `../skills/authority-surface-ops/`:
    - `weekly` → [weekly-review.md](../skills/authority-surface-ops/weekly-review.md)
    - `drift` → [authority-drift.md](../skills/authority-surface-ops/authority-drift.md)
 
-Compare output structure to [examples/reports/](https://github.com/farhanqaz/authority-surface-ops-skill/tree/main/examples/reports) when unsure.
+Compare output structure to `examples/reports/` in this skill when unsure.
 
 ## Step 3 — Surface reads
 

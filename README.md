@@ -1,5 +1,7 @@
 # Authority Surface Ops Skill
 
+[![CI](https://github.com/farhanqaz/authority-surface-ops-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/farhanqaz/authority-surface-ops-skill/actions/workflows/ci.yml)
+
 Live on-chain **admin surface operations** for Solana — mint, freeze, metadata, and upgrade authority verification, multisig pre-sign checks, drift detection, and incident handoff.
 
 > **Addon** for [Solana AI Kit](https://github.com/solanabr/solana-ai-kit) · **Extends** [solana-dev-skill](https://github.com/solana-foundation/solana-dev-skill)
@@ -51,7 +53,7 @@ Audit skills review **code before ship**. This skill operates **live admin surfa
 ```bash
 git clone https://github.com/farhanqaz/authority-surface-ops-skill
 cd authority-surface-ops-skill
-chmod +x install.sh validate.sh scripts/check-mint-authorities.sh
+chmod +x install.sh validate.sh scripts/check-mint-authorities.sh scripts/check-program-upgrade.sh
 ./install.sh              # ~/.claude/skills/
 ./install.sh --project    # ./.claude/skills/
 ./install.sh -y           # non-interactive
@@ -95,8 +97,9 @@ Every engagement produces an **Authority Surface Report** (YAML). Schema: `skill
 | Example | Description |
 |---------|-------------|
 | [examples/reports/](examples/reports/) | Launch, drift, weekly, upgrade samples |
-| [examples/output/ray-mainnet-report.txt](examples/output/ray-mainnet-report.txt) | Live RPC — RAY mint, `launch_verdict: go` |
-| [examples/output/devnet-usdc-report.txt](examples/output/devnet-usdc-report.txt) | Live RPC — devnet USDC, `launch_verdict: no-go` (fixed-supply profile) |
+| [examples/output/ray-mainnet-report.txt](examples/output/ray-mainnet-report.txt) | Live RPC — RAY mint |
+| [examples/output/token-program-upgrade-report.txt](examples/output/token-program-upgrade-report.txt) | Live RPC — SPL Token program upgrade |
+| [examples/output/devnet-usdc-report.txt](examples/output/devnet-usdc-report.txt) | Live RPC — devnet USDC mint |
 
 Sample output (mainnet RAY, fixed-supply profile):
 
@@ -121,11 +124,29 @@ Reproduce:
 
 ```bash
 ./scripts/check-mint-authorities.sh 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R mainnet-beta
+./scripts/check-program-upgrade.sh TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA mainnet-beta
 ./scripts/check-mint-authorities.sh 4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU devnet
 ./scripts/check-mint-authorities.sh EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v mainnet-beta stablecoin
 ```
 
 See [docs/CLI.md](docs/CLI.md).
+
+## CLI verification
+
+Read-only RPC helpers (no keys required):
+
+| Script | Surfaces |
+|--------|----------|
+| `scripts/check-mint-authorities.sh` | Mint + freeze |
+| `scripts/check-program-upgrade.sh` | Program upgrade authority |
+
+Metadata and Squads checks are agent-driven (Helius DAS / explorer / simulation) — see skill modules.
+
+```bash
+chmod +x scripts/check-mint-authorities.sh scripts/check-program-upgrade.sh
+```
+
+Live captured output: [`examples/output/`](examples/output/).
 
 ## Validation
 

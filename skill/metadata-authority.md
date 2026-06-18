@@ -9,9 +9,16 @@ Verify who can change token name, symbol, URI, and seller fee basis points.
 
 ## Read procedure
 
-1. Confirm mint or metadata PDA address.
-2. Fetch metadata account (Helius DAS `getAsset` or explorer decode).
-3. Record:
+1. Confirm mint address and cluster.
+2. Derive metadata PDA (Token Metadata program):
+
+```
+seeds = ["metadata", TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA, <MINT>]
+program = metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s
+```
+
+3. Fetch metadata account (Helius DAS `getAsset` with mint or metadata address, or explorer decode).
+4. Record:
 
 ```yaml
 metadata_account: <address>

@@ -7,7 +7,22 @@ Pre-sign verification for Squads and Realms proposals that touch authorities.
 - **Squads v4** vault transactions (most common founder multisig)
 - **Realms** governance accounts (authority holder identification only — not governance ops)
 
+Squads v4 multisig program (mainnet): `SQDS4ep65FkdopVRP8tqisRmT6ksGF2hqZ6j12GuLT`
+
 Out of scope: proposal creation, payroll, voting strategy.
+
+## Verify vault identity
+
+Before decoding instructions:
+
+1. Confirm the vault address in the Squads UI matches your documented baseline (`authority-baseline.json` → `multisigs[]`).
+2. On explorer, verify vault account **owner** is the Squads program ID above.
+3. Compare member set and threshold to baseline — any drift is **high** until explained.
+
+```bash
+solana account <VAULT_ADDRESS> --output json --url mainnet-beta
+# owner must be SQDS4ep65FkdopVRP8tqisRmT6ksGF2hqZ6j12GuLT
+```
 
 ## Pre-sign checklist
 

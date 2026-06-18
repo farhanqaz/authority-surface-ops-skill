@@ -70,6 +70,9 @@ fi
 
 [[ -x "${ROOT}/install.sh" ]]; check "install.sh executable" $?
 [[ -x "${ROOT}/scripts/check-mint-authorities.sh" ]]; check "check-mint-authorities.sh executable" $?
+[[ -x "${ROOT}/scripts/check-program-upgrade.sh" ]]; check "check-program-upgrade.sh executable" $?
+[[ -f "${ROOT}/CLAUDE.md" ]]; check "CLAUDE.md exists" $?
+[[ -f "${ROOT}/.github/workflows/ci.yml" ]]; check "CI workflow exists" $?
 [[ -f "${ROOT}/LICENSE" ]]; check "LICENSE exists" $?
 [[ -f "${ROOT}/docs/KIT_INTEGRATION.md" ]]; check "KIT_INTEGRATION.md exists" $?
 
@@ -78,6 +81,7 @@ for report in launch-go-ray.yaml launch-no-go-active-authorities.yaml drift-crit
 done
 
 [[ -f "${ROOT}/examples/output/ray-mainnet-report.txt" ]]; check "live output ray-mainnet" $?
+[[ -f "${ROOT}/examples/output/token-program-upgrade-report.txt" ]]; check "live output token-program-upgrade" $?
 
 echo ""
 echo "Results: $PASS passed, $FAIL failed"
