@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "cluster": "mainnet-beta",
+  "captured_at": "2026-06-18T12:00:00Z",
+  "assets": {
+    "mints": [
+      {
+        "address": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+        "symbol": "RAY",
+        "mint_authority": null,
+        "freeze_authority": null,
+        "metadata_update_authority": null
+      }
+    ],
+    "programs": [
+      {
+        "program_id": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "upgrade_authority": null
+      }
+    ],
+    "multisigs": []
+  }
+}

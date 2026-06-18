@@ -1,0 +1,31 @@
+report_version: 1
+mode: launch_gate
+cluster: devnet
+generated_at: "2026-06-18T12:00:00Z"
+assets:
+  - type: mint
+    address: "<YOUR_DEVNET_MINT>"
+    symbol: DEMO
+findings:
+  - id: F-mint-001
+    severity: critical
+    surface: mint
+    observation: "Mint authority held by single wallet <DEPLOYER_PUBKEY>"
+    recommendation: "Revoke mint authority or transfer to Squads vault before mainnet"
+    blocks_launch: true
+  - id: F-freeze-001
+    severity: high
+    surface: freeze
+    observation: "Freeze authority active on deployer wallet"
+    recommendation: "Revoke unless documented compliance requirement + multisig"
+    blocks_launch: true
+launch_verdict: no-go
+blocking_findings:
+  - F-mint-001
+  - F-freeze-001
+signed_off_by: []
+escalate: none
+notes: |
+  Pattern for a typical devnet test mint with open authorities.
+  Create fixture: spl-token create-token --url devnet
+  Then run: ./scripts/demo-audit.sh <MINT> devnet

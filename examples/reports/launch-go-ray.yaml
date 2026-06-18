@@ -1,0 +1,28 @@
+report_version: 1
+mode: launch_gate
+cluster: mainnet-beta
+generated_at: "2026-06-18T12:00:00Z"
+assets:
+  - type: mint
+    address: "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"
+    symbol: RAY
+findings:
+  - id: F-mint-001
+    severity: info
+    surface: mint
+    observation: "Mint authority revoked (null)"
+    recommendation: "No action — fixed supply model satisfied"
+    blocks_launch: false
+  - id: F-freeze-001
+    severity: info
+    surface: freeze
+    observation: "Freeze authority revoked (null)"
+    recommendation: "No action"
+    blocks_launch: false
+launch_verdict: go
+blocking_findings: []
+signed_off_by: []
+escalate: none
+notes: |
+  Example report for a production token with revoked mint/freeze authorities.
+  Reproduce: ./scripts/demo-audit.sh 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R mainnet-beta
